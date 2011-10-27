@@ -13,6 +13,17 @@ class WebUser extends CWebUser
         return $this->getState('__id') ? $this->getState('__id') : 0;
     }
 
+    public function __get($name)
+    {
+        $user = Yii::app()->getModule('user')->user($this->getId());
+
+        if (array_key_exists($name, $user->relations())) {
+            return $user->$name;
+        }
+
+        return parent::__get($name);
+    }
+
 //    protected function beforeLogin($id, $states, $fromCookie)
 //    {
 //        parent::beforeLogin($id, $states, $fromCookie);
