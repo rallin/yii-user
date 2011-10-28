@@ -15,10 +15,11 @@ class WebUser extends CWebUser
 
     public function __get($name)
     {
-        $user = Yii::app()->getModule('user')->user($this->getId());
-
-        if (array_key_exists($name, $user->relations())) {
-            return $user->$name;
+        if (array_key_exists($name, User::model()->relations())) {
+            if ($user = Yii::app()->getModule('user')->user($this->getId())) {
+                return $user->{$name};
+            }
+            return null;
         }
 
         return parent::__get($name);
