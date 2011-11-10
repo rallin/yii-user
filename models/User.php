@@ -84,6 +84,11 @@ class User extends CActiveRecord
         return $relations;
 	}
 
+	public function behaviors()
+	{
+		return CMap::mergeArray(Yii::app()->getModule('user')->getBehaviorsFor('user'), array());
+	}
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */

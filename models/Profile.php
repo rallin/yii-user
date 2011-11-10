@@ -105,6 +105,11 @@ class Profile extends UActiveRecord
 		return $relations;
 	}
 
+	public function behaviors()
+	{
+		return CMap::mergeArray(Yii::app()->getModule('user')->getBehaviorsFor('profile'), array());
+	}
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
