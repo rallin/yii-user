@@ -48,7 +48,7 @@ class UserModule extends CWebModule
 	
 	/**
 	 * @var boolean
-	 * @desc login after registration (need loginNotActiv or activeAfterRegister = true)
+	 * @desc login after registration (need loginNotActiv or activeAfterRegister = true) or after activation
 	 */
 	public $autoLogin=true;
 	

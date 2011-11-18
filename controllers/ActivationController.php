@@ -19,7 +19,15 @@ class ActivationController extends Controller
 				$find->activkey = UserModule::encrypting(microtime());
 				$find->status = 1;
 				$find->save();
-			    $this->render('/user/message',array('title'=>UserModule::t("User activation"),'content'=>UserModule::t("You account is activated.")));
+                if (!Yii::app()->controller->module->autoLogin) {
+                    $this->render('/user/message',array('title'=>UserModule::t("User activation"),'content'=>UserModule::t("You account is activated.")));
+                } else {
+                    $identity=new UserIdentity($find->username, '');
+                    $identity->authenticate(true);
+                    Yii::app()->user->login($identity,0);
+                    Yii::app()->user->setFlash('userActivationSuccess', UserModule::t("You account is activated."));
+                    $this->redirect(Yii::app()->controller->module->returnUrl);
+                }
 			} else {
 			    $this->render('/user/message',array('title'=>UserModule::t("User activation"),'content'=>UserModule::t("Incorrect activation URL.")));
 			}
