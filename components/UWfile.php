@@ -44,6 +44,16 @@ class UWfile {
 	 * @return string
 	 */
 	public function setAttributes($value,$model,$field_varname) {
+        return $value = $model->getAttribute($field_varname);
+    }
+
+    /**
+   	 * @param $value
+   	 * @param $model
+   	 * @param $field_varname
+   	 * @return string
+   	 */
+	public function save($value,$model,$field_varname) {
 		$value = CUploadedFile::getInstance($model,$field_varname);
 		
 		if ($value) {
@@ -98,5 +108,5 @@ class UWfile {
 		.' '.CHtml::activeLabelEx($model,'[uwfdel]'.$field->varname,array('label'=>UserModule::t('Delete file'),'style'=>'display:inline;')):'')
 		;
 	}
-	
+
 }

@@ -28,6 +28,31 @@ class UActiveRecord extends CActiveRecord
 			}
 			parent::setAttributes($values,$safeOnly);
 		}
+
+        public function beforeSave()
+        {
+            $values = $this->getAttributes();
+            foreach ($this->widgetAttributes() as $fieldName=>$className) {
+                if (isset($values[$fieldName])&&class_exists($className)) {
+                    $class = new $className;
+                    $arr = $this->widgetParams($fieldName);
+                    if ($arr) {
+                        $newParams = $class->params;
+                        $arr = (array)CJavaScript::jsonDecode($arr);
+                        foreach ($arr as $p=>$v) {
+                            if (isset($newParams[$p])) $newParams[$p] = $v;
+                        }
+                        $class->params = $newParams;
+                    }
+                    if (method_exists($class,'save')) {
+                        $value = $class->save($values[$fieldName],$this,$fieldName);
+                        $this->setAttribute($fieldName, $value);
+                    }
+                }
+            }
+
+            return parent::beforeSave();
+        }
 		
 		public function behaviors(){
 			return Yii::app()->getModule('user')->getBehaviorsFor(get_class($this));
