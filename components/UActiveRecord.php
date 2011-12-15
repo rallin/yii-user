@@ -33,7 +33,7 @@ class UActiveRecord extends CActiveRecord
         {
             $values = $this->getAttributes();
             foreach ($this->widgetAttributes() as $fieldName=>$className) {
-                if (isset($values[$fieldName])&&class_exists($className)) {
+                if (class_exists($className)) {
                     $class = new $className;
                     $arr = $this->widgetParams($fieldName);
                     if ($arr) {
