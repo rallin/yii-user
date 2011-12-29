@@ -41,6 +41,7 @@ $this->menu=array(
 		'activkey',
 		'create_at',
 		'lastvisit_at',
+		'previousvisit_at',
 		array(
 			'name' => 'superuser',
 			'value' => User::itemAlias("AdminStatus",$model->superuser),

@@ -36,6 +36,11 @@
     </div>
 
     <div class="row">
+        <?php echo $form->label($model,'previousvisit_at'); ?>
+        <?php echo $form->textField($model,'previousvisit_at'); ?>
+    </div>
+
+    <div class="row">
         <?php echo $form->label($model,'superuser'); ?>
         <?php echo $form->dropDownList($model,'superuser',$model->itemAlias('AdminStatus')); ?>
     </div>

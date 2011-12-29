@@ -50,6 +50,11 @@ $this->menu=array(
     	<td><?php echo $model->lastvisit_at; ?></td>
 	</tr>
 	<tr>
+	<tr>
+		<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('previousvisit_at')); ?></th>
+    	<td><?php echo $model->previousvisit_at; ?></td>
+	</tr>
+	<tr>
 		<th class="label"><?php echo CHtml::encode($model->getAttributeLabel('status')); ?></th>
     	<td><?php echo CHtml::encode(User::itemAlias("UserStatus",$model->status)); ?></td>
 	</tr>
